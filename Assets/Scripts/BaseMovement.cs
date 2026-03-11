@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class BaseMovement : MonoBehaviour
 {
+    public UnityEvent<bool> GrappleStateChanged;
     private Rigidbody2D m_rigidbody;
     private float m_speed = 10f;
     private Vector2 m_hitlocation;
@@ -26,10 +28,6 @@ public class BaseMovement : MonoBehaviour
 
     public void HandleMovement(InputAction.CallbackContext ctx)
     {
-        if (m_rigidbody.linearVelocity != Vector2.zero)
-        {
-            m_lineRenderer.enabled = false;
-        }
         if (ctx.performed)
         {
 
@@ -83,23 +81,29 @@ public class BaseMovement : MonoBehaviour
                 {
                     Debug.Log("got here");
                     m_hitlocation = hit.transform.position;
-                    m_ismoving = true;
+                    ChangeState(true);
                 }
             }
 
         }
         if (ctx.canceled)
         {
-            m_ismoving = false;
+            ChangeState(false);
             m_lineRenderer.enabled = false;
         }
 
+    }
+    private void ChangeState(bool m_isgrappling)
+    {
+        GrappleStateChanged?.Invoke(m_isgrappling);
+        m_ismoving = m_isgrappling;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "grapplepoint")
         {
-            m_ismoving = false;
+            ChangeState(false);
+            m_lineRenderer.enabled = false;
         }
     }
 }
