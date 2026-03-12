@@ -12,9 +12,9 @@ public class BaseMovement : MonoBehaviour
     private Vector2 m_playerdirection;
     private Vector2 m_lastdirection;
     private bool m_ismoving;
+    [SerializeField] private StaticSwitch m_staticswitch;
     [SerializeField] private LayerMask m_RayLayer;
     [SerializeField] private LineRenderer m_lineRenderer;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -68,30 +68,39 @@ public class BaseMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
+            RaycastHit2D[] hits;
             Debug.Log("Raycast");
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, m_lastdirection, 100, m_RayLayer);
-
-            if (hit)
+            hits = Physics2D.RaycastAll(transform.position, m_lastdirection, 100, m_RayLayer);
+            for (int i = 0; i < hits.Length; i++)
             {
-
-                m_lineRenderer.enabled = true;
-                m_lineRenderer.SetPosition(0, transform.position);
-                m_lineRenderer.SetPosition(1, hit.point);
-                if (hit.collider.tag == "grapplepoint")
+                if (hits[i])
                 {
-                    Debug.Log("got here");
-                    m_hitlocation = hit.transform.position;
-                    ChangeState(true);
+
+                    m_lineRenderer.enabled = true;
+                    m_lineRenderer.SetPosition(0, transform.position);
+                    m_lineRenderer.SetPosition(1, hits[i].point);
+                    if (hits[i].collider.tag == "grapplepoint")
+                    {
+                        m_hitlocation = hits[i].transform.position;
+                        ChangeState(true);
+                    }
+                    else if (hits[i].collider.tag == "staticswitch")
+                    {
+                        Debug.Log("detected tag");
+                        if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
+                        {
+                            Debug.Log("got staticswitch component!");
+                            m_staticswitch.TriggerStaticSwitch();
+                        }
+                    }
                 }
             }
-
         }
         if (ctx.canceled)
         {
             ChangeState(false);
             m_lineRenderer.enabled = false;
         }
-
     }
     private void ChangeState(bool m_isgrappling)
     {
