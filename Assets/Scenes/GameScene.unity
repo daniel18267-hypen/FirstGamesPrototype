@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e64eab7437db3541ad03808186c3127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerDoor:
+  TriggerDoorStatic:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 984369554}
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e64eab7437db3541ad03808186c3127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerDoor:
+  TriggerDoorStatic:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 984369554}
