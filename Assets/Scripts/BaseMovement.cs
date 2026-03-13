@@ -83,14 +83,26 @@ public class BaseMovement : MonoBehaviour
                     {
                         m_hitlocation = hits[i].transform.position;
                         ChangeState(true);
+                        break;
                     }
                     else if (hits[i].collider.tag == "staticswitch")
                     {
-                        Debug.Log("detected tag");
+                        
                         if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
                         {
                             Debug.Log("got staticswitch component!");
                             m_staticswitch.TriggerStaticSwitch();
+                            break;
+                        }
+                    }
+                    else if (hits[i].collider.tag == "volatileswitch")
+                    {
+                        Debug.Log("detected tag");
+                        if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
+                        {
+                            Debug.Log("got volatile switch component");
+                            m_volatileswitch.TriggerVolatileSwitch();
+
                         }
                     }
                 }

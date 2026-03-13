@@ -6,6 +6,7 @@ TagManager:
   tags:
   - grapplepoint
   - staticswitch
+  - volatileswitch
   layers:
   - Default
   - TransparentFX

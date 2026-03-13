@@ -17,6 +17,14 @@ public class LavaDamage : MonoBehaviour
             DamagePlayer?.Invoke(m_damage);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "volatileswitch")
+        {
+            TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch);
+            // call destruction
+        }
+    }
 
     public void GrappleStateHandler(bool grapplestate)
     {
