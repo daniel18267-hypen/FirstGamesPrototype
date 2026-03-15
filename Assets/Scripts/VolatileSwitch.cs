@@ -9,7 +9,8 @@ public class VolatileSwitch : MonoBehaviour
     public UnityEvent SubtractDoorCount;
     [SerializeField] private GameObject m_volatileswitch;
     private SpriteRenderer m_spriterenderer;
-    private Color m_red = new Color (1f, 0f, 0f, 0.58823529411f);
+    private Rigidbody2D m_rigidbody;
+    private Color m_red = new Color(1f, 0f, 0f, 0.58823529411f);
     private Color m_green = new Color(0f, 1f, 0f, 0.58823529411f);
     private bool m_hastriggered;
     private bool m_allswitchestriggered;
@@ -18,6 +19,7 @@ public class VolatileSwitch : MonoBehaviour
     private void Awake()
     {
         m_starttransform = transform.position;
+        m_rigidbody = GetComponent<Rigidbody2D>();
     }
     public void TriggerVolatileSwitch()
     {
@@ -48,18 +50,21 @@ public class VolatileSwitch : MonoBehaviour
             m_spriterenderer.color = m_red;
             m_hastriggered = true;
         }
-        
+
     }
 
-    
+
     public void SwitchTriggeredHandler() // function called from event that permanently sets switch to red if the door was succesfully destroyed
     {
         m_allswitchestriggered = true;
     }
-    public void DestroyGameObject()
+    public void ResetGameObject()
     {
-        // instantiate here
-        GameObject.Destroy(gameObject);
-
+        Debug.Log("Got here");
+        transform.position = m_starttransform;
+        m_rigidbody.linearVelocity = Vector3.zero;
     }
+
 }
+
+

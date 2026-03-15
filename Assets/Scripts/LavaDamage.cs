@@ -17,12 +17,15 @@ public class LavaDamage : MonoBehaviour
             DamagePlayer?.Invoke(m_damage);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "volatileswitch")
         {
-            TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch);
-            // call destruction
+            
+            if (collision.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
+            {
+                m_volatileswitch.ResetGameObject();
+            }
         }
     }
 
