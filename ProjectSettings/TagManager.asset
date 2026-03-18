@@ -7,6 +7,7 @@ TagManager:
   - grapplepoint
   - staticswitch
   - volatileswitch
+  - waypoint
   layers:
   - Default
   - TransparentFX
