@@ -1,25 +1,26 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyWaypoints : MonoBehaviour
 {
     [SerializeField] private GameObject[] m_waypoints;
-    private float m_speed = 5;
+    protected float m_speed = 5;
     private int m_waypointindex = 0;
-    private void FixedUpdate()
+    protected BoxCollider2D m_boxcollider2d;
+    public UnityEvent<int> DamagePlayer;
+    protected virtual void Awake()
     {
-
-        {
-            transform.position = Vector2.MoveTowards(transform.position, m_waypoints[m_waypointindex].transform.position, (m_speed * Time.deltaTime));
-
-
-
-        }
+        m_boxcollider2d = GetComponent<BoxCollider2D>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void FixedUpdate()
+    {
+         transform.position = Vector2.MoveTowards(transform.position, m_waypoints[m_waypointindex].transform.position, (m_speed * Time.deltaTime));          
+    }
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("got to start");
-        if (collision.gameObject.tag == "waypoint" && m_waypointindex <= m_waypoints.Length)
+        if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "waypoint" &&  m_waypointindex <= m_waypoints.Length)
         {
             Debug.Log("got here");
             m_waypointindex++;
@@ -28,5 +29,11 @@ public class EnemyWaypoints : MonoBehaviour
                 m_waypointindex = 0;
             }
         }
-    }
+        if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "Player")
+        {
+            DamagePlayer?.Invoke(20);
+        }
+            
+}
+         
 }
