@@ -85,6 +85,7 @@ public class BaseMovement : MonoBehaviour
                         ChangeState(true);
                         break;
                     }
+                    // make SWITCH STATEMENT INSTEAD!!!!!!!!
                     else if (hits[i].collider.tag == "staticswitch")
                     {
                         
@@ -103,6 +104,10 @@ public class BaseMovement : MonoBehaviour
                             Debug.Log("got volatile switch component");
                             m_volatileswitch.TriggerVolatileSwitch();
 
+                        }
+                    else if (hits[i].collider.tag == "enemy")
+                        {
+                         // do enemy script maybe see if you can refactor it to be a seperate health component also see if you can see transform.gameObject.trygetcomponent in here.
                         }
                     }
                 }

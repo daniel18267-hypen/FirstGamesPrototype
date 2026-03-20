@@ -148,3 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_waypoints: []
+  DamagePlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  ChangeHealthBar:
+    m_PersistentCalls:
+      m_Calls: []
