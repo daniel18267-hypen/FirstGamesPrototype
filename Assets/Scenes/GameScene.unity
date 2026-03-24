@@ -304,6 +304,26 @@ PrefabInstance:
       value: Square (4)
       objectReference: {fileID: 0}
     - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DoorDestructionHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: SubtractDoorCount.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
@@ -311,6 +331,18 @@ PrefabInstance:
       propertyPath: TriggerDoorVolatile.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorDestruction, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8419030616453891615, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: m_Color.a
       value: 0.5882353
@@ -492,6 +524,26 @@ PrefabInstance:
       value: Square (5)
       objectReference: {fileID: 0}
     - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DoorDestructionHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: SubtractDoorCount.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
@@ -499,6 +551,18 @@ PrefabInstance:
       propertyPath: TriggerDoorVolatile.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorDestruction, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8419030616453891615, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: m_Color.a
       value: 0.5882353
@@ -1077,11 +1141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16718f33e3d59e84baadaeb77c7d21f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_switchcount: 3
-  DoorDestroyed:
+  m_switchcount: 4
+  m_volatileswitchcount: 3
+  VolatileSwitchesTriggered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1088403932}
+      - m_Target: {fileID: 1125648213}
         m_TargetAssemblyTypeName: VolatileSwitch, Assembly-CSharp
         m_MethodName: SwitchTriggeredHandler
         m_Mode: 1
@@ -1105,7 +1170,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1125648213}
+      - m_Target: {fileID: 1088403932}
         m_TargetAssemblyTypeName: VolatileSwitch, Assembly-CSharp
         m_MethodName: SwitchTriggeredHandler
         m_Mode: 1
@@ -1749,6 +1814,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984369554}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DoorDestructionHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorDestruction, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577503813791307615, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5948675107362781215, guid: 30c7eac294f9e144b99a3ab446e62fdf, type: 3}
       propertyPath: m_Name
       value: Static Switch
@@ -1929,6 +2026,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemies
       objectReference: {fileID: 0}
+    - target: {fileID: 6920426294692468917, guid: e889792978d54d648be964681970ef56, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920426294692468917, guid: e889792978d54d648be964681970ef56, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8294469027904675009, guid: e889792978d54d648be964681970ef56, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4596
@@ -2001,6 +2106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6920426294692468917, guid: e889792978d54d648be964681970ef56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1908349046}
+    - targetCorrespondingSourceObject: {fileID: 6920426294692468917, guid: e889792978d54d648be964681970ef56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1908349052}
   m_SourcePrefab: {fileID: 100100000, guid: e889792978d54d648be964681970ef56, type: 3}
 --- !u!1 &1642127617
 GameObject:
@@ -2478,6 +2586,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8294469027904675009, guid: e889792978d54d648be964681970ef56, type: 3}
   m_PrefabInstance: {fileID: 1494964104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1908349052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908349035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3942cff598686b3478c9d5cd2a281b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1993663529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 677401733329621093, guid: 638d7d110e77efc43be385c1647f74f1, type: 3}
@@ -2672,6 +2792,26 @@ PrefabInstance:
       value: Square (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DoorDestructionHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: SubtractDoorCount.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
@@ -2679,6 +2819,18 @@ PrefabInstance:
       propertyPath: TriggerDoorVolatile.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 984369554}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorDestruction, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708022327487969673, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
+      propertyPath: TriggerDoor.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8419030616453891615, guid: 997680f2c351f4e4f93b17f1c4d1ece7, type: 3}
       propertyPath: m_Color.a
       value: 0.5882353

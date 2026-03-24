@@ -2,6 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Collections;
+using NUnit.Framework;
 
 public class BaseMovement : MonoBehaviour
 {
@@ -78,39 +80,47 @@ public class BaseMovement : MonoBehaviour
 
                     m_lineRenderer.enabled = true;
                     m_lineRenderer.SetPosition(0, transform.position);
-                    m_lineRenderer.SetPosition(1, hits[i].point);
-                    if (hits[i].collider.tag == "grapplepoint")
+                    m_lineRenderer.SetPosition(1, hits[i].transform.position);
+                    string m_tag = hits[i].collider.tag;
+                    switch (m_tag)
                     {
+                        case "volatileswitch":
+
+                            Debug.Log("detected tag");
+                            if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
+                            {
+                                Debug.Log("got volatile switch component");
+                                m_volatileswitch.TriggerVolatileSwitch();
+                                
+                            }
+                            continue;
+                   
+                        case "grapplepoint":
                         m_hitlocation = hits[i].transform.position;
                         ChangeState(true);
                         break;
-                    }
-                    // make SWITCH STATEMENT INSTEAD!!!!!!!!
-                    else if (hits[i].collider.tag == "staticswitch")
-                    {
-                        
+
+                        case "staticswitch":
                         if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
                         {
                             Debug.Log("got staticswitch component!");
                             m_staticswitch.TriggerStaticSwitch();
-                            break;
+       
                         }
+                        break;
+                        case "Enemy":
+                        if (hits[i].transform.gameObject.TryGetComponent<EnemyHealth> (out EnemyHealth m_enemyhealth))
+                            {
+                                m_enemyhealth.RecieveDamage(10f);
+                            }
+                        break;
                     }
-                    else if (hits[i].collider.tag == "volatileswitch")
-                    {
-                        Debug.Log("detected tag");
-                        if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
-                        {
-                            Debug.Log("got volatile switch component");
-                            m_volatileswitch.TriggerVolatileSwitch();
-
-                        }
-                    else if (hits[i].collider.tag == "enemy")
-                        {
-                         // do enemy script maybe see if you can refactor it to be a seperate health component also see if you can see transform.gameObject.trygetcomponent in here.
-                        }
-                    }
+                    break;
                 }
+                    
+                    //if (hits[i].collider.tag == "grapplepoint")
+                    
+                  
             }
         }
         if (ctx.canceled)

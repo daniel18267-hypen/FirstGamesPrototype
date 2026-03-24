@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class VolatileSwitch : MonoBehaviour
 {
-    public UnityEvent TriggerDoorVolatile;
+    public UnityEvent<bool> TriggerDoor;
     public UnityEvent SubtractDoorCount;
     [SerializeField] private GameObject m_volatileswitch;
     private SpriteRenderer m_spriterenderer;
@@ -28,7 +28,7 @@ public class VolatileSwitch : MonoBehaviour
         if (m_hastriggered == false)
         {
             Debug.Log("SwitchTriggered");
-            TriggerDoorVolatile?.Invoke();
+            TriggerDoor?.Invoke(true);
             m_hastriggered = true;
             m_spriterenderer.color = m_red;
             StartCoroutine(ResetSwitch());

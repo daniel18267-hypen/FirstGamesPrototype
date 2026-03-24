@@ -39,9 +39,5 @@ public class EnemyChase : EnemyWaypoints
             m_patrolstate = true;
         }
     }
-    protected override void RecieveDamage(float damage)
-    {
-        base.RecieveDamage(damage);
-    }
 }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class StaticSwitch : MonoBehaviour
 {
-    public UnityEvent TriggerDoorStatic;
+    public UnityEvent<bool> TriggerDoor;
     private bool m_hastriggered;
     private SpriteRenderer m_spriterenderer;
     public void TriggerStaticSwitch()
@@ -14,7 +14,7 @@ public class StaticSwitch : MonoBehaviour
         if (m_hastriggered == false)
         {
             Debug.Log("SwitchTriggered");
-            TriggerDoorStatic?.Invoke();
+            TriggerDoor?.Invoke(false);
             m_spriterenderer.color = Color.red;
             m_hastriggered = true;
         }
