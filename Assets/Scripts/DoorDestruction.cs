@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.Events;
 public class DoorDestruction : MonoBehaviour
 {
-    [SerializeField] private int m_switchcount = 0;
-    [SerializeField] private int m_volatileswitchcount = 0;
-    private int m_switchestriggered = 0;
-    private int m_volatileswitchestriggered = 0;
+    [SerializeField] private int m_switchcount;
+    [SerializeField] private int m_volatileswitchcount;
+    private int m_switchestriggered;
+    private int m_volatileswitchestriggered;
     public UnityEvent VolatileSwitchesTriggered;
     public void DoorDestructionHandler(bool m_isvolatile)
     {
