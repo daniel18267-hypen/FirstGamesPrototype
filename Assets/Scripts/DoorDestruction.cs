@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.Events;
 public class DoorDestruction : MonoBehaviour
 {
-    [SerializeField] private int m_switchcount;
-    [SerializeField] private int m_volatileswitchcount;
+    [SerializeField] private int m_switchcount = 0;
+    [SerializeField] private int m_volatileswitchcount = 0;
     private int m_switchestriggered = 0;
     private int m_volatileswitchestriggered = 0;
     public UnityEvent VolatileSwitchesTriggered;
@@ -22,6 +22,7 @@ public class DoorDestruction : MonoBehaviour
             }
         }
         Debug.Log(m_switchestriggered);
+        Debug.Log(m_volatileswitchestriggered);
         if (m_switchcount == m_switchestriggered)
         {
             gameObject.SetActive(false);
@@ -30,6 +31,7 @@ public class DoorDestruction : MonoBehaviour
     }
     public void DoorRemoveCount()
     {
+        Debug.Log("door remove conut triggered");
         m_volatileswitchestriggered--;
         m_switchestriggered--;
     }

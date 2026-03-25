@@ -13,7 +13,6 @@ public class EnemyWaypoints : MonoBehaviour
     private Vector3 m_originalscale;
     protected BoxCollider2D m_boxcollider2d;
     public UnityEvent<int> DamagePlayer;
-    public UnityEvent<float> ChangeHealthBar;
     protected virtual void Awake()
     {
         m_boxcollider2d = GetComponent<BoxCollider2D>();
