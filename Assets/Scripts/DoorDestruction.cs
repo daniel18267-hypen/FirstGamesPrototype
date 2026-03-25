@@ -4,17 +4,20 @@ public class DoorDestruction : MonoBehaviour
 {
     [SerializeField] private int m_switchcount;
     [SerializeField] private int m_volatileswitchcount;
-    private int m_switchestriggered;
-    private int m_volatileswitchestriggered;
+    private int m_switchestriggered = 0;
+    private int m_volatileswitchestriggered = 0;
     public UnityEvent VolatileSwitchesTriggered;
     public void DoorDestructionHandler(bool m_isvolatile)
     {
-        m_switchestriggered += 1;
+        m_switchestriggered++;
         if (m_isvolatile == true)
         {
+           
             m_volatileswitchestriggered++;
+            Debug.Log($"volatile switches triggered,{m_volatileswitchestriggered}");
             if (m_volatileswitchestriggered == m_volatileswitchcount)
             {
+                Debug.Log("GOT TO IMPORTANT");
                 VolatileSwitchesTriggered?.Invoke();
             }
         }
@@ -27,7 +30,7 @@ public class DoorDestruction : MonoBehaviour
     }
     public void DoorRemoveCount()
     {
-        m_volatileswitchestriggered -= 1;
-        m_switchestriggered -= 1;
+        m_volatileswitchestriggered--;
+        m_switchestriggered--;
     }
 }

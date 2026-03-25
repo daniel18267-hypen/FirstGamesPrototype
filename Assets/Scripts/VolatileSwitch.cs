@@ -27,7 +27,6 @@ public class VolatileSwitch : MonoBehaviour
         m_spriterenderer = gameObject.GetComponent<SpriteRenderer>();
         if (m_hastriggered == false)
         {
-            Debug.Log("SwitchTriggered");
             TriggerDoor?.Invoke(true);
             m_hastriggered = true;
             m_spriterenderer.color = m_red;
@@ -56,6 +55,7 @@ public class VolatileSwitch : MonoBehaviour
 
     public void SwitchTriggeredHandler() // function called from event that permanently sets switch to red if the door was succesfully destroyed
     {
+        Debug.Log("got to switch triggered");
         m_allswitchestriggered = true;
     }
     public void ResetGameObject()

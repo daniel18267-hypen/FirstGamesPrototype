@@ -96,8 +96,10 @@ public class BaseMovement : MonoBehaviour
                             continue;
                    
                         case "grapplepoint":
-                        m_hitlocation = hits[i].transform.position;
-                        ChangeState(true);
+                        {
+                            m_hitlocation = hits[i].transform.position;
+                            ChangeState(true);
+                        }
                         break;
 
                         case "staticswitch":
