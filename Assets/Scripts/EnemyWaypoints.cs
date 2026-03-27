@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ public class EnemyWaypoints : MonoBehaviour
     [SerializeField] private GameObject[] m_waypoints;
     protected float m_speed = 5;
     protected float m_health = 50;
+    private bool m_coroutinerunning = false;
    
     private int m_waypointindex = 0;
     private Vector3 m_originalscale;
@@ -33,9 +35,21 @@ public class EnemyWaypoints : MonoBehaviour
                 m_waypointindex = 0;
             }
         }
-        if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "Player")
+        
+    }
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+        if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "Player" && m_coroutinerunning == false)
         {
+            StartCoroutine(Cooldown());
             DamagePlayer?.Invoke(20);
         }
+    }
+    private  IEnumerator Cooldown()
+    {
+        m_coroutinerunning = true;
+        yield return new WaitForSeconds(0.75f);
+        m_coroutinerunning = false;
+        Debug.Log("End Coroutine");
     }
 }

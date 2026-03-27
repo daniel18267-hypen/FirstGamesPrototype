@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -35,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
     }
   private void PlayerDeath()
     {
-
+        SceneManager.LoadScene(1);
     }
 }
 

@@ -72,7 +72,7 @@ public class BaseMovement : MonoBehaviour
         {
             RaycastHit2D[] hits;
             Debug.Log("Raycast");
-            hits = Physics2D.RaycastAll(transform.position, m_lastdirection, 100, m_RayLayer);
+            hits = Physics2D.RaycastAll(transform.position, m_lastdirection, 25, m_RayLayer);
             for (int i = 0; i < hits.Length; i++)
             {
                 if (hits[i])
@@ -144,5 +144,6 @@ public class BaseMovement : MonoBehaviour
             m_lineRenderer.enabled = false;
         }
     }
+    
 }
 

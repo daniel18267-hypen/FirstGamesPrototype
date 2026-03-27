@@ -10,8 +10,6 @@ public class LavaDamage : MonoBehaviour
     private bool m_coroutinerunning;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
-
         if (collision.gameObject.tag == "Player"  && m_isgrappling == false && m_coroutinerunning == false)
         {
             Debug.Log("collided with lava tile");
