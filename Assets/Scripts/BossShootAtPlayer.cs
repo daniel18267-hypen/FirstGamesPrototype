@@ -5,8 +5,10 @@ using UnityEngine;
 public class BossShootAtPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject m_projectileprefab;
-    [SerializeField] private float m_projectilespeed = 10;
+    [SerializeField] private float m_projectilespeed = 5;
     [SerializeField] private GameObject m_player;
+    [SerializeField] private GameObject[] m_projectiles;
+    private int m_projectileindex = 0;
     private bool m_coroutinerunning = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,19 +27,27 @@ public class BossShootAtPlayer : MonoBehaviour
         {
             m_player = collision.gameObject;
             StartCoroutine(Cooldown());
-            GameObject m_bullet = Instantiate(m_projectileprefab, transform.position, Quaternion.identity);
-            if (m_bullet.TryGetComponent<Rigidbody2D>(out Rigidbody2D m_projectilerigidbody))
+            m_projectiles[m_projectileindex].transform.position = transform.position;
+            m_projectiles[m_projectileindex].SetActive(true);
+            if (m_projectiles[m_projectileindex].TryGetComponent<Rigidbody2D>(out Rigidbody2D m_projectilerigidbody))
             {
+                Debug.Log(m_projectiles.Length);
                 Debug.Log("has rigidbody2d");
                 Debug.Log(m_player.transform.position);
-                m_projectilerigidbody.AddForce((m_player.transform.position - transform.position) * m_projectilespeed, ForceMode2D.Impulse);
+                m_projectilerigidbody.AddForce((m_player.transform.position - transform.position).normalized * m_projectilespeed, ForceMode2D.Impulse);
+                m_projectileindex++;
+                if (m_projectileindex >= m_projectiles.Length)
+                {
+                    Debug.Log("reset player index");
+                    m_projectileindex = 0;
+                }
             }
         }
     }
     IEnumerator Cooldown()
     {
         m_coroutinerunning = true;
-        yield return new  WaitForSeconds(0.75f);
+        yield return new  WaitForSeconds(2f);
         m_coroutinerunning = false;
     }
 }
