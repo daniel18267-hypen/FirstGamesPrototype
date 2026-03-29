@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -18,12 +19,18 @@ public class BaseMovement : MonoBehaviour
     private Vector2 m_playerdirection;
     private Vector2 m_lastdirection;
     private bool m_ismoving;
-    [SerializeField] private StaticSwitch m_staticswitch;
+    private Animator m_animator;
+    private Sprite m_sprite;
+    private SpriteRenderer m_spriterenderer;
+    [SerializeField] private int m_playerdamage;
     [SerializeField] private LayerMask m_RayLayer;
     [SerializeField] private LineRenderer m_lineRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        m_sprite = GetComponent<Sprite>();
+        m_spriterenderer = GetComponent<SpriteRenderer>();
+       m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -34,17 +41,18 @@ public class BaseMovement : MonoBehaviour
 
     public void HandleMovement(InputAction.CallbackContext ctx)
     {
+       
         if (ctx.performed)
         {
-
             m_playerdirection = (ctx.ReadValue<Vector2>());
             if (m_rigidbody != null) // defensive programming
             {
                 m_rigidbody.linearVelocity = m_playerdirection * m_speed;
             }
-
+            
             m_lastdirection = m_playerdirection;
         }
+      
 
         else if (ctx.canceled)
         {
@@ -53,14 +61,13 @@ public class BaseMovement : MonoBehaviour
 
                 m_rigidbody.linearVelocity = Vector2.zero;
             }
-
             m_playerdirection = Vector2.zero;
         }
-
     }
     private void FixedUpdate()
     {
-
+        double m_lookrotation = Math.Atan2(m_lastdirection.y, m_lastdirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis((float)m_lookrotation, (Vector3.forward));
         if (m_ismoving == true)
         {
             Debug.Log(m_hitlocation);
@@ -80,14 +87,14 @@ public class BaseMovement : MonoBehaviour
             
                 for (int i = 0; i < hits.Length; i++)
                 {
-                hits = hits.OrderBy(i => Vector2.Distance(this.transform.position, i.transform.position)).ToArray();
+                //hits = hits.OrderBy(i => Vector2.Distance(this.transform.position, i.transform.position)).ToArray();
                 Debug.Log(hits[i]);
                     if (hits[i] && !hits[i].collider.isTrigger)
                     {
 
                         m_lineRenderer.enabled = true;
                         m_lineRenderer.SetPosition(0, transform.position);
-                        m_lineRenderer.SetPosition(1, hits[i].transform.position);
+                        m_lineRenderer.SetPosition(1, hits[i].point);
                         string m_tag = hits[i].collider.tag;
                         switch (m_tag)
                         {
@@ -122,7 +129,7 @@ public class BaseMovement : MonoBehaviour
                             case "Enemy":
                                 if (hits[i].transform.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth m_enemyhealth))
                                 {
-                                    m_enemyhealth.RecieveDamage(10f);
+                                    m_enemyhealth.RecieveDamage(m_playerdamage);
                                 }
                                 continue;
 

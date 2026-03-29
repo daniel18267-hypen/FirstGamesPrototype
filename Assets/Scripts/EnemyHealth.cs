@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     private Image m_healthbar;
-    private float m_maxhealth = 100;
+   [SerializeField] private float m_maxhealth = 100;
     private float m_health = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
