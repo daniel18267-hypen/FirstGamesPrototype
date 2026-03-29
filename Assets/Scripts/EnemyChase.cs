@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyChase : EnemyWaypoints
 {
+    // optimise to not have a trigger and not a trigger and just one box collider!!!
     private bool m_patrolstate = true;
     private GameObject m_player;
     private CircleCollider2D m_circlecollider2d;

@@ -18,6 +18,7 @@ public class ProjectileDamage : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             {
+                // OPTIMISE THIS USING SERIALIZED FIELDS!!!!
                 m_player = collision.gameObject;
                 m_healthscript = m_player.GetComponent<PlayerHealth>();
                 DamagePlayer.AddListener(m_healthscript.DamageHandler);

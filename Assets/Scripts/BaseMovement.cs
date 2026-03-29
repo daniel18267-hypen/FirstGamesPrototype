@@ -87,7 +87,6 @@ public class BaseMovement : MonoBehaviour
             
                 for (int i = 0; i < hits.Length; i++)
                 {
-                //hits = hits.OrderBy(i => Vector2.Distance(this.transform.position, i.transform.position)).ToArray();
                 Debug.Log(hits[i]);
                     if (hits[i] && !hits[i].collider.isTrigger)
                     {
