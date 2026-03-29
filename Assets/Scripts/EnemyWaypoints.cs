@@ -10,13 +10,14 @@ public class EnemyWaypoints : MonoBehaviour
     protected float m_speed = 5;
     protected float m_health = 50;
     private bool m_coroutinerunning = false;
-   
+    protected Rigidbody2D m_rigidbody;
     private int m_waypointindex = 0;
     private Vector3 m_originalscale;
     protected BoxCollider2D m_boxcollider2d;
     public UnityEvent<int> DamagePlayer;
     protected virtual void Awake()
     {
+        m_rigidbody = GetComponent<Rigidbody2D>();
         m_boxcollider2d = GetComponent<BoxCollider2D>();
     }
     protected virtual void FixedUpdate()

@@ -9,6 +9,7 @@ TagManager:
   - volatileswitch
   - waypoint
   - Enemy
+  - breakgrapple
   layers:
   - Default
   - TransparentFX

@@ -47,7 +47,7 @@ public class BossShootAtPlayer : MonoBehaviour
     IEnumerator Cooldown()
     {
         m_coroutinerunning = true;
-        yield return new  WaitForSeconds(2f);
+        yield return new  WaitForSeconds(5f);
         m_coroutinerunning = false;
     }
 }

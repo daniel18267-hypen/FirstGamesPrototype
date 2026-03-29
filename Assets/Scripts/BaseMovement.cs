@@ -1,9 +1,13 @@
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
-using System.Collections;
 using NUnit.Framework;
+using System;
+using System.Collections;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class BaseMovement : MonoBehaviour
 {
@@ -73,57 +77,64 @@ public class BaseMovement : MonoBehaviour
             RaycastHit2D[] hits;
             Debug.Log("Raycast");
             hits = Physics2D.RaycastAll(transform.position, m_lastdirection, 25, m_RayLayer);
-            for (int i = 0; i < hits.Length; i++)
-            {
-                if (hits[i])
+            
+                for (int i = 0; i < hits.Length; i++)
                 {
-
-                    m_lineRenderer.enabled = true;
-                    m_lineRenderer.SetPosition(0, transform.position);
-                    m_lineRenderer.SetPosition(1, hits[i].transform.position);
-                    string m_tag = hits[i].collider.tag;
-                    switch (m_tag)
+                hits = hits.OrderBy(i => Vector2.Distance(this.transform.position, i.transform.position)).ToArray();
+                Debug.Log(hits[i]);
+                    if (hits[i] && !hits[i].collider.isTrigger)
                     {
-                        case "volatileswitch":
 
-                            Debug.Log("detected tag");
-                            if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
-                            {
-                                Debug.Log("got volatile switch component");
-                                m_volatileswitch.TriggerVolatileSwitch();
-                                
-                            }
-                            continue;
-                   
-                        case "grapplepoint":
+                        m_lineRenderer.enabled = true;
+                        m_lineRenderer.SetPosition(0, transform.position);
+                        m_lineRenderer.SetPosition(1, hits[i].transform.position);
+                        string m_tag = hits[i].collider.tag;
+                        switch (m_tag)
                         {
-                            m_hitlocation = hits[i].transform.position;
-                            ChangeState(true);
-                        }
-                        break;
+                            case "breakgrapple":
+                                break;
+                            case "volatileswitch":
 
-                        case "staticswitch":
-                        if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
-                        {
-                            Debug.Log("got staticswitch component!");
-                            m_staticswitch.TriggerStaticSwitch();
-       
+                                Debug.Log("detected tag");
+                                if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
+                                {
+                                    Debug.Log("got volatile switch component");
+                                    m_volatileswitch.TriggerVolatileSwitch();
+
+                                }
+                                continue;
+
+                            case "grapplepoint":
+                                {
+                                    m_hitlocation = hits[i].transform.position;
+                                    ChangeState(true);
+                                }
+                                break;
+
+                            case "staticswitch":
+                                if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
+                                {
+                                    Debug.Log("got staticswitch component!");
+                                    m_staticswitch.TriggerStaticSwitch();
+
+                                }
+                                break;
+                            case "Enemy":
+                                if (hits[i].transform.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth m_enemyhealth))
+                                {
+                                    m_enemyhealth.RecieveDamage(10f);
+                                }
+                                continue;
+
+
                         }
-                        break;
-                        case "Enemy":
-                        if (hits[i].transform.gameObject.TryGetComponent<EnemyHealth> (out EnemyHealth m_enemyhealth))
-                            {
-                                m_enemyhealth.RecieveDamage(10f);
-                            }
                         break;
                     }
-                    break;
-                }
-                    
+
                     //if (hits[i].collider.tag == "grapplepoint")
-                    
-                  
-            }
+
+
+                }
         }
         if (ctx.canceled)
         {
