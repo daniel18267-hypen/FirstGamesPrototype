@@ -32,11 +32,12 @@ public class BaseMovement : MonoBehaviour
         m_spriterenderer = GetComponent<SpriteRenderer>();
        m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_lineRenderer.positionCount = 2;
     }
 
     private void Start()
     {
-        m_lineRenderer.positionCount = 2;
+       
     }
 
     public void HandleMovement(InputAction.CallbackContext ctx)
