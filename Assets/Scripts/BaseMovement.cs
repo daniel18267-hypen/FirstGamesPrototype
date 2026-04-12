@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
@@ -40,6 +41,10 @@ public class BaseMovement : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// handles basic movement
+    /// </summary>
+    /// <param name="ctx"></param>
     public void HandleMovement(InputAction.CallbackContext ctx)
     {
        
@@ -65,10 +70,14 @@ public class BaseMovement : MonoBehaviour
             m_playerdirection = Vector2.zero;
         }
     }
+    /// <summary>
+    /// handles rotation, and if grappling changes line renderer for grapple to players current position.
+    /// </summary>
     private void FixedUpdate()
     {
         double m_lookrotation = Math.Atan2(m_lastdirection.y, m_lastdirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis((float)m_lookrotation, (Vector3.forward));
+       
         if (m_ismoving == true)
         {
             Debug.Log(m_hitlocation);
@@ -77,7 +86,10 @@ public class BaseMovement : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Function for handling grapple, triggered when left mouse button is pressed, fires a grapple, line renderer used for visuals, raycast used for interacting with other objects
+    /// </summary>
+    /// <param name="ctx"></param>
     public void HandleGrapple(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -96,6 +108,7 @@ public class BaseMovement : MonoBehaviour
                         m_lineRenderer.SetPosition(0, transform.position);
                         m_lineRenderer.SetPosition(1, hits[i].point);
                         string m_tag = hits[i].collider.tag;
+                    // uses switch statement to check each tag and do behaviours accordingly, uses trygetcomponent for defensive programming
                         switch (m_tag)
                         {
                             case "breakgrapple":
@@ -138,17 +151,21 @@ public class BaseMovement : MonoBehaviour
                         break;
                     }
 
-                    //if (hits[i].collider.tag == "grapplepoint")
 
 
                 }
         }
+        // if cancelled stop displaying line renderer
         if (ctx.canceled)
         {
             ChangeState(false);
             m_lineRenderer.enabled = false;
         }
     }
+    /// <summary>
+    /// handles changing from grappling to not grappling, used to tell lava script if it should do damage or not, called when start / stop grappling
+    /// </summary>
+    /// <param name="m_isgrappling"></param>
     private void ChangeState(bool m_isgrappling)
     {
         GrappleStateChanged?.Invoke(m_isgrappling);

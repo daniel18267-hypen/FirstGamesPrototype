@@ -10,6 +10,7 @@ public class LavaDamage : MonoBehaviour
     private bool m_coroutinerunning;
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // does damage if player isn't grappling and if coroutine isn't running, ensuring cooldown between each time damage is taken
         if (collision.gameObject.tag == "Player"  && m_isgrappling == false && m_coroutinerunning == false)
         {
             Debug.Log("collided with lava tile");
@@ -19,6 +20,7 @@ public class LavaDamage : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // calls function on the movable switches to set them back to their spawn location
         if (collision.gameObject.tag == "volatileswitch")
         {
             
@@ -28,11 +30,15 @@ public class LavaDamage : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// called when player starts or stops grappling, sets isgrappling to true dependent on that
+    /// </summary>
+    /// <param name="grapplestate"></param>
     public void GrappleStateHandler(bool grapplestate)
     {
         m_isgrappling = grapplestate;
     }
+    // cooldown for lava damage.
     private IEnumerator Cooldown()
     {
         m_coroutinerunning = true;

@@ -9,7 +9,10 @@ public class PlayerHealth : MonoBehaviour
     private float m_maxhealth = 100;
     private float m_health = 100;
     [SerializeField] private Image m_healthbar;
-    
+    /// <summary>
+    /// called via event when player takes damage, updates health bar and triggers death if health <= 0
+    /// </summary>
+    /// <param name="m_amount"></param>
   public void DamageHandler(int m_amount)
     {
         m_health -= m_amount;
@@ -20,20 +23,18 @@ public class PlayerHealth : MonoBehaviour
             PlayerDeath();
         }
     }
-  public void HealHandler(int m_amount)
-    {
-        m_health += m_amount;
-        if (m_health > m_maxhealth) // clamps health to max health
-        {
-            m_health = 100;
-        }
-        UpdatehealthBar(m_health);
-    }
+    /// <summary>
+    /// updates healthbar ui, called when player takes damage
+    /// </summary>
+    /// <param name="m_health"></param>
   private void UpdatehealthBar(float m_health)
     {
         Debug.Log(m_healthbar.fillAmount);
         m_healthbar.fillAmount = m_health / 100;
     }
+    /// <summary>
+    /// called when player health <0, reloads scene.
+    /// </summary>
   private void PlayerDeath()
     {
         SceneManager.LoadScene(0);
