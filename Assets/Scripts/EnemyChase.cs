@@ -12,6 +12,9 @@ public class EnemyChase : EnemyWaypoints
         base.Awake();
         m_circlecollider2d = GetComponent<CircleCollider2D>();
     }
+    /// <summary>
+    /// if not patrolling move towards the player, patrolstate is set when player gets near enemy.
+    /// </summary>
     protected override void FixedUpdate()
     {
     if (m_patrolstate == true)
@@ -24,6 +27,10 @@ public class EnemyChase : EnemyWaypoints
         }
     
     }
+    /// <summary>
+    /// when player nearby sets patrol state to false which in fixedupdate means it will start chasing them.
+    /// </summary>
+    /// <param name="collision"></param>
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -33,6 +40,10 @@ public class EnemyChase : EnemyWaypoints
             m_patrolstate = false;
         }
     }
+    /// <summary>
+    /// starts patrolling again once not near enemy
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && !m_circlecollider2d.IsTouching(collision))

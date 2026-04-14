@@ -7,28 +7,30 @@ public class DoorDestruction : MonoBehaviour
     private int m_switchestriggered;
     private int m_volatileswitchestriggered;
     public UnityEvent VolatileSwitchesTriggered;
+    /// <summary>
+    /// called when switches are triggered, bool is passed in to determine if volatile switch
+    /// </summary>
+    /// <param name="m_isvolatile"></param>
     public void DoorDestructionHandler(bool m_isvolatile)
     {
         m_switchestriggered++;
         if (m_isvolatile == true)
         {
-           
             m_volatileswitchestriggered++;
-            Debug.Log($"volatile switches triggered,{m_volatileswitchestriggered}");
+            // if volatile switches are equal to volatile switch count for that room triggers event that permanently sets them to red.
             if (m_volatileswitchestriggered == m_volatileswitchcount)
             {
-                Debug.Log("GOT TO IMPORTANT");
                 VolatileSwitchesTriggered?.Invoke();
             }
         }
-        Debug.Log(m_switchestriggered);
-        Debug.Log(m_volatileswitchestriggered);
+        // if all switches in a room triggered the door is destroyed
         if (m_switchcount == m_switchestriggered)
         {
             gameObject.SetActive(false);
             
         }  
     }
+    // called via event when not all volatile switches in a scene are activated.
     public void DoorRemoveCount()
     {
         Debug.Log("door remove conut triggered");

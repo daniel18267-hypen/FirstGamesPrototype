@@ -21,6 +21,9 @@ public class VolatileSwitch : MonoBehaviour
         m_starttransform = transform.position;
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
+    /// <summary>
+    /// called when hit with grapple, starts coroutine that resets switch back to normal if not all switches have been hhit
+    /// </summary>
     public void TriggerVolatileSwitch()
     {
 
@@ -34,6 +37,10 @@ public class VolatileSwitch : MonoBehaviour
 
         }
     }
+    /// <summary>
+    /// resets switch, unless door returns that all switches have been activated, in which case all switches are set to true.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ResetSwitch()
     {
         yield return new WaitForSeconds(0.1f);
@@ -45,17 +52,16 @@ public class VolatileSwitch : MonoBehaviour
         }
         else if (m_allswitchestriggered == true)
         {
-            Debug.Log("got here");
             m_spriterenderer.color = m_red;
-            m_hastriggered = true;
         }
 
     }
 
-
-    public void SwitchTriggeredHandler() // function called from event that permanently sets switch to red if the door was succesfully destroyed
+    /// <summary>
+    ///  function called from event activated when all switches are activated.
+    /// </summary>
+    public void SwitchTriggeredHandler() 
     {
-        Debug.Log("got to switch triggered");
         m_allswitchestriggered = true;
     }
     public void ResetGameObject()

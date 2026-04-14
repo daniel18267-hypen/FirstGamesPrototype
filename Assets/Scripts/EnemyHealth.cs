@@ -6,14 +6,15 @@ public class EnemyHealth : MonoBehaviour
     private Image m_healthbar;
    [SerializeField] private float m_maxhealth = 100;
     private float m_health = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         m_health = m_maxhealth;
         m_healthbar = this.gameObject.GetComponentInChildren<Image>();
     }
-
-    // Update is called once per frame
+    /// <summary>
+    /// takes damage, passes in damage, sets the enemy healthbar to reflect current health
+    /// </summary>
+    /// <param name="damage"></param>
     public void RecieveDamage(float damage)
     {
         m_health = m_health - damage;

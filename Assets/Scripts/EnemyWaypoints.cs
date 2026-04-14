@@ -22,8 +22,13 @@ public class EnemyWaypoints : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
+        // move towards next waypoint in array.
          transform.position = Vector2.MoveTowards(transform.position, m_waypoints[m_waypointindex].transform.position, (m_speed * Time.deltaTime));          
     }
+    /// <summary>
+    /// if touching waypoint set movement target to be next waypoint
+    /// </summary>
+    /// <param name="collision"></param>
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("got to start");
@@ -38,6 +43,10 @@ public class EnemyWaypoints : MonoBehaviour
         }
         
     }
+    /// <summary>
+    ///  does damage to player
+    /// </summary>
+    /// <param name="collision"></param>
     protected virtual void OnTriggerStay2D(Collider2D collision)
     {
         if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "Player" && m_coroutinerunning == false)
@@ -46,6 +55,10 @@ public class EnemyWaypoints : MonoBehaviour
             DamagePlayer?.Invoke(20);
         }
     }
+    /// <summary>
+    ///cooldown for enemy doing damage to player so it doesn't just instakill them.
+    /// </summary>
+    /// <returns></returns>
     private  IEnumerator Cooldown()
     {
         m_coroutinerunning = true;
