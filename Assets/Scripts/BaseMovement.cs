@@ -173,6 +173,7 @@ public class BaseMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // cancels grapple if touching grapple point
         if (collision.gameObject.tag == "grapplepoint")
         {
             ChangeState(false);
