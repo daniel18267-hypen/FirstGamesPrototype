@@ -19,55 +19,42 @@ public class BaseMovement : MonoBehaviour
     private Vector2 m_hitlocation;
     private Vector2 m_playerdirection;
     private Vector2 m_lastdirection;
+    private double m_lookrotation;
     private bool m_ismoving;
-    private Animator m_animator;
-    private Sprite m_sprite;
-    private SpriteRenderer m_spriterenderer;
     [SerializeField] private int m_playerdamage;
     [SerializeField] private LayerMask m_RayLayer;
     [SerializeField] private LineRenderer m_lineRenderer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        m_sprite = GetComponent<Sprite>();
-        m_spriterenderer = GetComponent<SpriteRenderer>();
-       m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
+        // two positions on line renderer component - meaning straight line
         m_lineRenderer.positionCount = 2;
     }
-
-    private void Start()
-    {
-       
-    }
-
     /// <summary>
     /// handles basic movement
     /// </summary>
     /// <param name="ctx"></param>
     public void HandleMovement(InputAction.CallbackContext ctx)
     {
-       
         if (ctx.performed)
         {
+            // reads player direction in from WASD input
             m_playerdirection = (ctx.ReadValue<Vector2>());
             if (m_rigidbody != null) // defensive programming
             {
+                // player direction (read in from WASD movement) affects velocity of player
                 m_rigidbody.linearVelocity = m_playerdirection * m_speed;
             }
-            
+            // this is done so the grapple will grapple in last direction faced
             m_lastdirection = m_playerdirection;
         }
-      
-
         else if (ctx.canceled)
         {
             if (m_rigidbody != null) // defensive programming
             {
-
+                // if input stopped player stops moving
                 m_rigidbody.linearVelocity = Vector2.zero;
             }
-            m_playerdirection = Vector2.zero;
         }
     }
     /// <summary>
@@ -75,13 +62,16 @@ public class BaseMovement : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        double m_lookrotation = Math.Atan2(m_lastdirection.y, m_lastdirection.x) * Mathf.Rad2Deg;
+        // essentially combines the players last direction in the x and y values to be one angle
+        m_lookrotation = Math.Atan2(m_lastdirection.y, m_lastdirection.x) * Mathf.Rad2Deg;
+        // makes the player look at angle just formed, so faces in direction of movement.
         transform.rotation = Quaternion.AngleAxis((float)m_lookrotation, (Vector3.forward));
-       
+        // this is set to true if the player has hit a grapple point and is moving towards it
         if (m_ismoving == true)
         {
-            Debug.Log(m_hitlocation);
+            // sets the position of the first element of the line renderer to be the player
             m_lineRenderer.SetPosition(0, transform.position);
+            // player moves towards the grapple point
             transform.position = Vector2.MoveTowards(transform.position, m_hitlocation, (m_speed * Time.deltaTime));
         }
     }
@@ -94,16 +84,15 @@ public class BaseMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
+            // everything that is hit is stored in an array
             RaycastHit2D[] hits;
-            Debug.Log("Raycast");
             hits = Physics2D.RaycastAll(transform.position, m_lastdirection, 25, m_RayLayer);
-            
+            // loops through everything that was hit
                 for (int i = 0; i < hits.Length; i++)
                 {
-                Debug.Log(hits[i]);
                     if (hits[i] && !hits[i].collider.isTrigger)
                     {
-
+                    // line renderer is enabled and it's position is set to be a straight line between the player and the object hit
                         m_lineRenderer.enabled = true;
                         m_lineRenderer.SetPosition(0, transform.position);
                         m_lineRenderer.SetPosition(1, hits[i].point);
@@ -111,48 +100,44 @@ public class BaseMovement : MonoBehaviour
                     // uses switch statement to check each tag and do behaviours accordingly, uses trygetcomponent for defensive programming
                         switch (m_tag)
                         {
+                        // used for things you want the grapple to stop at
                             case "breakgrapple":
                                 break;
                             case "volatileswitch":
-
-                                Debug.Log("detected tag");
+                                // how trygetcomponent works is if the component VolatileSwitch is on what was hit it'll be set to the m_volatileswitch variable.
                                 if (hits[i].transform.gameObject.TryGetComponent<VolatileSwitch>(out VolatileSwitch m_volatileswitch))
                                 {
-                                    Debug.Log("got volatile switch component");
+                                    // triggers switch
                                     m_volatileswitch.TriggerVolatileSwitch();
-
                                 }
+                                // used so the raycast goes through this switch and doesn't stop at it
                                 continue;
 
                             case "grapplepoint":
                                 {
+                                // when hit will change state, which in fixedupdate will start player moving towards hit point
                                     m_hitlocation = hits[i].transform.position;
                                     ChangeState(true);
                                 }
                                 break;
-
                             case "staticswitch":
                                 if (hits[i].transform.gameObject.TryGetComponent<StaticSwitch>(out StaticSwitch m_staticswitch))
                                 {
-                                    Debug.Log("got staticswitch component!");
+                                    // triggers switch
                                     m_staticswitch.TriggerStaticSwitch();
-
                                 }
                                 break;
                             case "Enemy":
                                 if (hits[i].transform.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth m_enemyhealth))
                                 {
+                                // damages enemy
                                     m_enemyhealth.RecieveDamage(m_playerdamage);
                                 }
+                                // used so line goes through enemy and doesn't stop at it
                                 continue;
-
-
                         }
                         break;
                     }
-
-
-
                 }
         }
         // if cancelled stop displaying line renderer

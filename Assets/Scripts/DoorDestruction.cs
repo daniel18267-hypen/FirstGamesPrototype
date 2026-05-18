@@ -27,13 +27,11 @@ public class DoorDestruction : MonoBehaviour
         if (m_switchcount == m_switchestriggered)
         {
             gameObject.SetActive(false);
-            
         }  
     }
-    // called via event when not all volatile switches in a scene are activated.
+    // called via event when not all volatile switches in a scene are activated, to reset switch count back to how it was before volatile switches were triggered
     public void DoorRemoveCount()
     {
-        Debug.Log("door remove conut triggered");
         m_volatileswitchestriggered--;
         m_switchestriggered--;
     }

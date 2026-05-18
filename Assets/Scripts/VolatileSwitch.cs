@@ -26,7 +26,7 @@ public class VolatileSwitch : MonoBehaviour
     /// </summary>
     public void TriggerVolatileSwitch()
     {
-
+        // triggers door and sets switch colour to red.
         m_spriterenderer = gameObject.GetComponent<SpriteRenderer>();
         if (m_hastriggered == false)
         {
@@ -34,7 +34,6 @@ public class VolatileSwitch : MonoBehaviour
             m_hastriggered = true;
             m_spriterenderer.color = m_red;
             StartCoroutine(ResetSwitch());
-
         }
     }
     /// <summary>
@@ -44,19 +43,19 @@ public class VolatileSwitch : MonoBehaviour
     private IEnumerator ResetSwitch()
     {
         yield return new WaitForSeconds(0.1f);
+        // if they haven't all been triggered, change colour to green and make it so door count is set to normal.
         if (m_allswitchestriggered == false)
         {
             SubtractDoorCount?.Invoke();
             m_spriterenderer.color = m_green;
             m_hastriggered = false;
         }
+        // if all volatile switches have been triggered, switches are set to red
         else if (m_allswitchestriggered == true)
         {
             m_spriterenderer.color = m_red;
         }
-
     }
-
     /// <summary>
     ///  function called from event activated when all switches are activated.
     /// </summary>
@@ -64,13 +63,14 @@ public class VolatileSwitch : MonoBehaviour
     {
         m_allswitchestriggered = true;
     }
+    /// <summary>
+    /// Used when collided with lava, sets volatile switch to start position to prevent softlocks
+    /// </summary>
     public void ResetGameObject()
     {
-        Debug.Log("Got here");
         transform.position = m_starttransform;
         m_rigidbody.linearVelocity = Vector3.zero;
     }
-
 }
 
 

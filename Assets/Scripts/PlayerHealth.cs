@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float m_maxhealth = 100;
     private float m_health = 100;
     [SerializeField] private Image m_healthbar;
     /// <summary>
@@ -17,7 +16,6 @@ public class PlayerHealth : MonoBehaviour
     {
         m_health -= m_amount;
         UpdatehealthBar(m_health);
-        Debug.Log(m_health);
         if (m_health <= 0)
         {
             PlayerDeath();
@@ -29,7 +27,6 @@ public class PlayerHealth : MonoBehaviour
     /// <param name="m_health"></param>
   private void UpdatehealthBar(float m_health)
     {
-        Debug.Log(m_healthbar.fillAmount);
         m_healthbar.fillAmount = m_health / 100;
     }
     /// <summary>

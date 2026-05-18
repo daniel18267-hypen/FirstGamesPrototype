@@ -31,30 +31,30 @@ public class EnemyWaypoints : MonoBehaviour
     /// <param name="collision"></param>
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("got to start");
         if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "waypoint" && m_waypointindex <= m_waypoints.Length)
         {
-            Debug.Log("got here");
             m_waypointindex++;
+            // if out of bounds goes back to first waypoint in array.
             if (m_waypointindex >= m_waypoints.Length)
             {
                 m_waypointindex = 0;
             }
         }
-        
     }
     /// <summary>
     ///  does damage to player
     /// </summary>
     /// <param name="collision"></param>
-    protected virtual void OnTriggerStay2D(Collider2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        if (m_boxcollider2d.IsTouching(collision) && collision.gameObject.tag == "Player" && m_coroutinerunning == false)
+        if(collision.gameObject.tag == "Player" && m_coroutinerunning == false)
         {
+            // does damage to player every 0.75 seconds
             StartCoroutine(Cooldown());
             DamagePlayer?.Invoke(20);
         }
     }
+ 
     /// <summary>
     ///cooldown for enemy doing damage to player so it doesn't just instakill them.
     /// </summary>
@@ -64,6 +64,5 @@ public class EnemyWaypoints : MonoBehaviour
         m_coroutinerunning = true;
         yield return new WaitForSeconds(0.75f);
         m_coroutinerunning = false;
-        Debug.Log("End Coroutine");
     }
 }

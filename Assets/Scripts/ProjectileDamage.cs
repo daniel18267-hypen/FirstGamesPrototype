@@ -17,17 +17,28 @@ public class ProjectileDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            {
-                // OPTIMISE THIS USING SERIALIZED FIELDS!!!!
-                m_player = collision.gameObject;
-                m_healthscript = m_player.GetComponent<PlayerHealth>();
-                DamagePlayer.AddListener(m_healthscript.DamageHandler);
-            }
+            
+               // gets player and players health script
+        m_player = collision.gameObject;
+        m_healthscript = m_player.GetComponent<PlayerHealth>();
+                // adds players health script as a listener to the damage player event
+          DamagePlayer.AddListener(m_healthscript.DamageHandler);
+            
+            // damages players
             DamagePlayer?.Invoke(m_projectiledamage);
             transform.position = new Vector3(10000, 100000, 10000);
-            m_rigidbody.linearVelocity = Vector3.zero;
-            m_rigidbody.angularVelocity = 0;
         }
+    }
+    /// <summary>
+    /// called when spawning projectile for object pooling, resets all rigidbody values to 0 to ensure in right direction when called again
+    /// </summary>
+    public void ResetRB()
+    {
+        m_rigidbody.linearVelocity = Vector2.zero;
+        m_rigidbody.angularVelocity = 0.0f;
+        m_rigidbody.totalForce = Vector2.zero;
+        m_rigidbody.linearDamping = 0.0f;
+        m_rigidbody.angularDamping = 0.0f;
     }
 
 }
