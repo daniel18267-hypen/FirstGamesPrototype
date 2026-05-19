@@ -1,15 +1,8 @@
-using NUnit.Framework;
+
 using System;
-using System.Collections;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class BaseMovement : MonoBehaviour
 {
